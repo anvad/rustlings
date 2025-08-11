@@ -16,13 +16,13 @@ fn main() {
     // below with your favorite character.
     // Try a letter, try a digit (in single quotes), try a special character, try a character
     // from a different language than your own, try an emoji 😉
-    // let your_character = '';
+    let your_character = 'ç';
 
     if your_character.is_alphabetic() {
-        println!("Alphabetical!");
+        println!("Alphabetical!"); // 'a' 'ç'
     } else if your_character.is_numeric() {
-        println!("Numerical!");
+        println!("Numerical!"); // '1'
     } else {
-        println!("Neither alphabetic nor numeric!");
+        println!("Neither alphabetic nor numeric!"); // '😒' ',' '∑'
     }
 }
