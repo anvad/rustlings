@@ -26,7 +26,21 @@ fn vec_map(input: &[i32]) -> Vec<i32> {
 }
 
 fn double_ref(a: &i32) -> i32 {
+    let var: i32 = 5;
+    assert_eq!(&var * 8, 40);
+    // This works, because &var refers to 5, not to the address of var. Note that in C, the & is an operator. In Rust, the & is acting as part of the type of the variable. Hence, the type is &i32.
+    // Please see the [book](https://doc.rust-lang.org/stable/book/ch04-02-references-and-borrowing.html) and carefully follow the diagrams.
+
+    // https://stackoverflow.com/questions/57739755/how-could-rust-multiply-i32-with-i32
+    // Did the compiler implement the operation between &i32 and i32?
+    // Yes. Well, not the compiler, but rather the standard library. You can see the impl in the documentation.
     a * 2
+}
+
+fn double_ref_deref(a: &i32) -> i32 {
+    // here i am doing an explicit dereference
+    // i don't need to since the multiplication is implemented for &i32 in the standard library
+    *a * 2
 }
 
 fn double(a: i32) -> i32 {
@@ -41,8 +55,12 @@ fn main() {
     let b: Vec<i32> = a.iter().map(double_ref).collect();
 
     // if i don't want to modify the signature, then i have to have a closure that first de-references
+    // another option would be to use traits (just like the stdlib does)
     let c: Vec<i32> = a.iter().map(|elem| double(*elem)).collect();
-    println!("a={:?}, b={:?}, c={:?}", a, b, c)
+
+    let d: Vec<i32> = a.iter().map(double_ref_deref).collect();
+
+    println!("a={:?}, b={:?}, c={:?}, d={:?}", a, b, c, d)
 }
 
 #[cfg(test)]
