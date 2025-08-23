@@ -49,6 +49,7 @@ bin = [
   { name = "vecs1_sol", path = "solutions/05_vecs/vecs1.rs" },
   { name = "vecs2", path = "exercises/05_vecs/vecs2.rs" },
   { name = "vecs2_sol", path = "solutions/05_vecs/vecs2.rs" },
+  { name = "vecs3", path = "exercises/05_vecs/vecs3.rs" },
   { name = "move_semantics1", path = "exercises/06_move_semantics/move_semantics1.rs" },
   { name = "move_semantics1_sol", path = "solutions/06_move_semantics/move_semantics1.rs" },
   { name = "move_semantics2", path = "exercises/06_move_semantics/move_semantics2.rs" },
