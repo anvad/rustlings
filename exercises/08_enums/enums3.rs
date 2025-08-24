@@ -46,6 +46,15 @@ impl State {
     fn process(&mut self, message: Message) {
         // TODO: Create a match expression to process the different message
         // variants using the methods defined above.
+        match message {
+            Message::Resize { width, height } => self.resize(width, height),
+            // here, i am destructuring the Point struct as well, just for illustration
+            // i could have left it as p in both, the LHS and RHS
+            Message::Move(Point { x, y }) => self.move_position(Point { x, y }),
+            Message::Echo(s) => self.echo(s),
+            Message::ChangeColor(r, g, b) => self.change_color(r, g, b),
+            Message::Quit => self.quit(),
+        }
     }
 }
 
