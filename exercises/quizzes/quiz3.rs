@@ -11,15 +11,26 @@
 // Make the necessary code changes in the struct `ReportCard` and the impl
 // block to support alphabetical report cards in addition to numerical ones.
 
+use std::fmt::Display;
+
 // TODO: Adjust the struct as described above.
-struct ReportCard {
-    grade: f32,
+// here, i've constrained the ReportCard struct to only accept grade type that implements Display
+// in the quiz3.rs solution, they left this generic and only constrained the implementation
+// so, their solution allows ReportCards that don't have a print function!
+// struct ReportCard<T: Display> {
+//     grade: T,
+//     student_name: String,
+//     student_age: u8,
+// }
+
+struct ReportCard<T> {
+    grade: T,
     student_name: String,
     student_age: u8,
 }
 
 // TODO: Adjust the impl block as described above.
-impl ReportCard {
+impl<T: Display> ReportCard<T> {
     fn print(&self) -> String {
         format!(
             "{} ({}) - achieved a grade of {}",
@@ -28,8 +39,19 @@ impl ReportCard {
     }
 }
 
+struct MagicalGrade;
+
 fn main() {
     // You can optionally experiment here.
+    let report_card = ReportCard {
+        grade: MagicalGrade,
+        student_name: "Dumbledore".to_string(),
+        student_age: 77,
+    };
+    println!(
+        "{}'s grade is {}",
+        report_card.student_name, /*report_card.grade*/ report_card.student_age,
+    );
 }
 
 #[cfg(test)]
