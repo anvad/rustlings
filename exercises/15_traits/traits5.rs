@@ -34,8 +34,46 @@ fn some_func(item: impl SomeTrait + OtherTrait) -> bool {
     item.some_function() && item.other_function()
 }
 
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+
 fn main() {
     // You can optionally experiment here.
+    fn main() {
+        // experimenting with reference lifetimes
+        let a = 1;
+        let mut r = &a;
+        println!("r initial: {r}");
+        let b = 2;
+
+        {
+            let x = 5;
+            println!("x: {x}");
+            // `x` does not live long enough
+            // borrowed value does not live long enough
+            // r = &x;
+        }
+
+        r = &b;
+
+        println!("r: {r}");
+
+        let x = String::from("abcd");
+        let y = String::from("xyz");
+        let r = longest(&x, &y);
+
+        // cannot move out of `y` because it is borrowed
+        // move out of `y` occurs on line 72 but earlier borrow occurs on line 68 and is later used in line 73
+        // let z = y; // this will not work
+        println!("The longest string is {}", r);
+        let z = y; // this will be fine, because `r` is no longer used after line 73, so the borrow ends there.
+        println!("z: {}", z);
+    }
 }
 
 #[cfg(test)]
